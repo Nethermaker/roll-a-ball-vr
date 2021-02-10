@@ -12,6 +12,8 @@ namespace Valve.VR.InteractionSystem
 	//-------------------------------------------------------------------------
 	public class Arrow : MonoBehaviour
 	{
+		[SerializeField] private Transform particles;
+
 		public ParticleSystem glintParticle;
 		public Rigidbody arrowHeadRB;
 		public Rigidbody shaftRB;
@@ -271,6 +273,15 @@ namespace Valve.VR.InteractionSystem
 			if ( scaleParentObject != null )
 			{
 				Destroy( scaleParentObject );
+			}
+		}
+
+		void OnTriggerEnter(Collider other)
+        {
+			if (other.gameObject.CompareTag("Pick Up"))
+			{
+				other.gameObject.SetActive(false);
+				Instantiate(particles, other.transform.position, Quaternion.identity);
 			}
 		}
 	}
