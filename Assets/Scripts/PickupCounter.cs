@@ -5,27 +5,28 @@ using UnityEngine.UI;
 
 public class PickupCounter : MonoBehaviour
 {
-    private int count = 0;
+    private int startCount = 0;
 
     [SerializeField] private Text countText;
 
     // Start is called before the first frame update
     void Start()
     {
-        count = transform.childCount;
+        startCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
     }
 
     // Update is called once per frame
     void Update()
     {
         int currentCount = 0;
-        foreach (Transform child in transform)
+        GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pick Up");
+        foreach (GameObject pickup in pickups)
         {
-            if (child.gameObject.activeInHierarchy)
+            if (pickup.activeInHierarchy)
             {
                 currentCount++;
             }
         }
-        countText.text = "Count: " + (count - currentCount);
+        countText.text = "Count: " + (startCount - currentCount);
     }
 }
