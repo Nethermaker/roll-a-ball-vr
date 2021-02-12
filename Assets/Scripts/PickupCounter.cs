@@ -27,6 +27,15 @@ public class PickupCounter : MonoBehaviour
                 currentCount++;
             }
         }
-        countText.text = "Count: " + (startCount - currentCount);
+
+        int score = startCount - currentCount;
+        if (score == startCount)
+        {
+            countText.text = "You Win!";
+        }
+        else
+        {
+            countText.text = "Count: " + score;
+        }
     }
 }

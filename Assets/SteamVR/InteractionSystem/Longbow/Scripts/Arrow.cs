@@ -13,6 +13,7 @@ namespace Valve.VR.InteractionSystem
 	public class Arrow : MonoBehaviour
 	{
 		[SerializeField] private Transform particles;
+		private AudioSource pop;
 
 		public ParticleSystem glintParticle;
 		public Rigidbody arrowHeadRB;
@@ -44,6 +45,7 @@ namespace Valve.VR.InteractionSystem
 		void Start()
 		{
 			Physics.IgnoreCollision( shaftRB.GetComponent<Collider>(), Player.instance.headCollider );
+			pop = GetComponent<AudioSource>();
 		}
 
 
@@ -282,6 +284,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				other.gameObject.SetActive(false);
 				Instantiate(particles, other.transform.position, Quaternion.identity);
+				pop.Play();
 			}
 		}
 	}
